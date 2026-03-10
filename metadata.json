@@ -1,0 +1,5 @@
+{
+  "name": "AccessMate",
+  "description": "A comprehensive accessibility Chrome Extension improving visual, cognitive, and auditory web experiences using Google Gemini.",
+  "requestFramePermissions": []
+}

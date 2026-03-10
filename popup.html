@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessMate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1 class="logo-text">
+            <span>AccessMate</span>
+        </h1>
+        <button id="btn-settings" class="settings-btn hidden" aria-label="Settings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.532 1.532 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </header>
+
+    <!-- View: Onboarding -->
+    <div id="view-onboarding" class="view-container">
+        <div class="welcome-header">
+            <h2 class="welcome-title">Welcome!</h2>
+            <p class="welcome-subtitle">Setup your AI key to start.</p>
+        </div>
+
+        <div class="card">
+            <label class="input-label">Gemini API Key</label>
+            <div class="input-wrapper">
+                <input type="password" id="input-api-key" placeholder="Paste key here..." class="input-field">
+                <button id="btn-toggle-visibility" class="btn-toggle-vis">Show</button>
+            </div>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="link-text">Get a free key &rarr;</a>
+        </div>
+
+        <button id="btn-save-key" class="btn-primary">Save & Start</button>
+        <p id="error-msg" class="error-msg hidden">Please enter a valid key.</p>
+    </div>
+
+    <!-- View: Dashboard -->
+    <div id="view-dashboard" class="hidden">
+        
+        <!-- Section: Visual -->
+        <div class="section">
+            <h3 class="section-title">Visual</h3>
+            
+            <div class="control-row">
+                <span class="control-label">Smart Contrast</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-contrast">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <div class="range-header">
+                    <span class="control-label">Text Size</span>
+                    <span class="range-val" id="text-size-val">100%</span>
+                </div>
+                <input type="range" id="slider-text-size" min="100" max="200" step="10" value="100">
+            </div>
+
+            <button id="btn-describe-images" class="btn-outline">
+                <span class="loader hidden" id="loader-images"></span>
+                <span>AI Describe Images</span>
+            </button>
+        </div>
+
+        <!-- Section: Cognitive -->
+        <div class="section">
+            <h3 class="section-title">Cognitive</h3>
+            
+            <div class="control-row">
+                <span class="control-label">Reader Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-reader">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="control-row">
+                <span class="control-label">Bionic Reading</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-bionic">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="control-row">
+                <span class="control-label">Dyslexia Font</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-dyslexia">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <button id="btn-simplify" class="btn-outline btn-purple">
+                <span class="loader hidden" id="loader-simplify"></span>
+                <span>AI Simplify Text</span>
+            </button>
+        </div>
+
+        <!-- Section: Auditory -->
+        <div class="section" style="border-bottom: none;">
+            <h3 class="section-title">Auditory</h3>
+            <div class="audio-row">
+                <button id="btn-tts-play" class="btn-icon" title="Play">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                    </svg>
+                    <span style="margin-left: 4px; font-size: 0.875rem; font-weight: 500;">Play</span>
+                </button>
+                <button id="btn-tts-pause" class="btn-icon" title="Pause">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <button id="btn-tts-stop" class="btn-icon" title="Stop">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <p class="hint-text">Highlight text to read specific sections</p>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="utils.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
